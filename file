@@ -1,0 +1,62 @@
+| Concept                   | Wireshark Display Filter         | What It Shows                       |
+| ------------------------- | -------------------------------- | ----------------------------------- |
+| **Beacon frames**         | `wlan.fc.type_subtype == 8`      | Periodic access point beacons       |
+| **Probe requests**        | `wlan.fc.type_subtype == 4`      | Clients searching for networks      |
+| **Probe responses**       | `wlan.fc.type_subtype == 5`      | AP replying to probe requests       |
+| **Association requests**  | `wlan.fc.type_subtype == 0`      | Clients associating to AP           |
+| **Association responses** | `wlan.fc.type_subtype == 1`      | AP confirming association           |
+| **Authentication**        | `wlan.fc.type_subtype == 11`     | 802.11 authentication messages      |
+| **Deauthentication**      | `wlan.fc.type_subtype == 12`     | Client/AP ending session            |
+| **Disassociation**        | `wlan.fc.type_subtype == 10`     | Station disassociating from AP      |
+| **Retransmissions**       | `wlan.fc.retry == 1`             | Frames that are retransmitted       |
+| **Data frames**           | `wlan.fc.type == 2`              | Actual user data packets            |
+| **Control frames**        | `wlan.fc.type == 1`              | RTS/CTS/ACK, etc.                   |
+| **Management frames**     | `wlan.fc.type == 0`              | Beacons, probe req/res, assoc, etc. |
+| **SSID filter**           | `wlan.ssid`                      | Displays SSID tags present          |
+| **Specific SSID**         | `wlan.ssid == "YourNetworkName"` | Only packets from that SSID         |
+
+
+
+| Concept                  | Filter                        | What It Shows                     |
+| ------------------------ | ----------------------------- | --------------------------------- |
+| **Only TCP traffic**     | `tcp`                         | All TCP packets                   |
+| **Only UDP traffic**     | `udp`                         | All UDP packets                   |
+| **Only ICMP traffic**    | `icmp`                        | Ping / echo request/reply         |
+| **Specific IP address**  | `ip.addr == 192.168.0.10`     | All packets to/from that host     |
+| **Specific port**        | `tcp.port == 80`              | All TCP packets using port 80     |
+| **TCP retransmissions**  | `tcp.analysis.retransmission` | Retransmitted TCP segments        |
+| **Duplicate ACKs**       | `tcp.analysis.duplicate_ack`  | Duplicate acknowledgements        |
+| **TCP handshake**        | `tcp.flags.syn == 1`          | SYN packets (start of connection) |
+| **TCP resets**           | `tcp.flags.reset == 1`        | TCP RST packets                   |
+| **Lost segments**        | `tcp.analysis.lost_segment`   | Missing packets (gaps)            |
+| **Out-of-order packets** | `tcp.analysis.out_of_order`   | Packets arriving out of sequence  |
+
+| Concept                   | Filter                             | What It Shows               |
+| ------------------------- | ---------------------------------- | --------------------------- |
+| **All HTTP traffic**      | `http`                             | HTTP requests & responses   |
+| **HTTP GET requests**     | `http.request.method == "GET"`     | Webpage/file requests       |
+| **HTTP POST requests**    | `http.request.method == "POST"`    | Form submissions or uploads |
+| **Specific file request** | `http.request.uri contains ".jpg"` | Requests for images         |
+| **Host name filter**      | `http.host contains "example.com"` | Traffic to/from a domain    |
+| **Response codes**        | `http.response.code == 200`        | Successful responses        |
+
+| Concept                 | Filter                          | What It Shows                |
+| ----------------------- | ------------------------------- | ---------------------------- |
+| **All DNS packets**     | `dns`                           | DNS queries and responses    |
+| **DNS queries only**    | `dns.flags.response == 0`       | Client requests              |
+| **DNS responses only**  | `dns.flags.response == 1`       | Server replies               |
+| **Specific query name** | `dns.qry.name == "example.com"` | Lookup for a specific domain |
+| **All ARP packets**     | `arp`                           | Address resolution traffic   |
+| **ARP requests only**   | `arp.opcode == 1`               | Who-has queries              |
+| **ARP replies only**    | `arp.opcode == 2`               | Is-at responses              |
+
+
+| Concept               | Filter                                           | What It Shows                              |
+| --------------------- | ------------------------------------------------ | ------------------------------------------ |
+| **By MAC address**    | `wlan.addr == aa:bb:cc:dd:ee:ff`                 | Specific wireless device                   |
+| **Frame length**      | `frame.len > 1000`                               | Large packets                              |
+| **Time range**        | `frame.time >= "2025-10-22 08:00:00"`            | Packets after specific time                |
+| **Specific protocol** | `frame.protocols contains "http"`                | Packets where protocol stack includes HTTP |
+| **Follow TCP stream** | (Right-click any packet → *Follow → TCP Stream*) | Reconstructs conversation                  |
+
+
